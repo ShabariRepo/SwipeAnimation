@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Animated, PanResponder, Dimensions } from 'react-native';
+import { View, Animated, PanResponder, Dimensions, LayoutAnimation, UIManager } from 'react-native';
 
 // this is something that wont change over time so keep it outside
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -60,6 +60,13 @@ class Deck extends Component {
         ////// this.panResponder = panResponder
         // you can create a panResponder to its own component (its outside of a state system)
         this.state = { panResponder, position, index: 0 };
+    }
+
+    componentWillUpdate(){
+        // useful for android but also put for iOS just incase (doesnt matter for iOS)
+        UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+
+        LayoutAnimation.spring();
     }
 
     forceSwipe(direction) {
