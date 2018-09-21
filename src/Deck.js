@@ -148,18 +148,18 @@ class Deck extends Component {
             // other cards not part of previous or current index jsut make regular card
             return (
                 // style={styles.cardStyle} to stack
-                <View key={item.id} style={[styles.cardStyle, { zIndex: i * -1 }]}>
+                <Animated.View key={item.id} style={[styles.cardStyle, { zIndex: i * -1 }]}>
                     {this.props.renderCard(item)}
-                </View>
+                </Animated.View>
             );
         }).reverse();
     }
 
     render() {
         return (
-            <Animated.View>
+            <View>
                 {this.renderCards()}
-            </Animated.View>
+            </View>
         );
     }
 }
