@@ -148,7 +148,14 @@ class Deck extends Component {
             // other cards not part of previous or current index jsut make regular card
             return (
                 // style={styles.cardStyle} to stack
-                <Animated.View key={item.id} style={[styles.cardStyle, { zIndex: i * -1 }]}>
+                // the extra style here is to cascade
+                // for every card take 10 pixels multiplied by the difference between i - index
+                // i is the id for each thing, its the individual item's position within this.props.data array
+                // this.state.index is the id so it will just reduce by a little
+                // so becomes 10 * the number of spaces the card is away from becoming the top card in the deck
+                <Animated.View 
+                    key={item.id} style={[styles.cardStyle, { zIndex: i * -1 }, { top: 10 * (i - this.state.index) }]}                
+                >
                     {this.props.renderCard(item)}
                 </Animated.View>
             );
