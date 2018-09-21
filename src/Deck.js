@@ -62,6 +62,17 @@ class Deck extends Component {
         this.state = { panResponder, position, index: 0 };
     }
 
+    // lifecycle method that is called whenever a component is going to be rendered with a new set of props (so in this case new data sets)
+    // nextProps is convention but its arbitrary its like jquery functions defining w.e name as param so it makes more sense when comparing to this.props
+    componentWillReceiveProps(nextProps){
+        // if the new set of items are not the same array as current then set index back to 0
+        if(nextProps.data !== this.props.data){
+            // this is also done in onSwipeComplete to move index up to next card
+            this.setState({ index: 0 });
+        }
+    }
+
+    // to make the cards slide to top gracefully
     componentWillUpdate(){
         // useful for android but also put for iOS just incase (doesnt matter for iOS)
         UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
